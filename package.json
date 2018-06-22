@@ -1,9 +1,0 @@
-{
-  "name": "desk.pics-server",
-  "version": "1.0.0",
-  "description": "Desk.pics server. NodeJS, Typescript, GraphQL",
-  "main": "index.js",
-  "repository": "https://github.com/serranoarevalo/desk.pics-server",
-  "author": "Nicolas Serrano Arévalo <itnico.las.me@gmail.com>",
-  "license": "MIT"
-}
