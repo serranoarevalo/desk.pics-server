@@ -1,0 +1,8 @@
+type User {
+  email: String!
+  firstName: String!
+  lastName: String!
+  deskPics: [DeskPic]
+  createdAt: String!
+  updatedAt: String!
+}

@@ -1,0 +1,7 @@
+type Pic {
+  id: Int!
+  userId: Int!
+  user: User!
+  createdAt: String!
+  updatedAt: String!
+}
