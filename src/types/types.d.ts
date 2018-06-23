@@ -2,8 +2,8 @@ import { Request } from "express";
 import User from "../entities/User";
 
 export interface ICoords {
-  lat: number;
-  lng: number;
+  lat: number | null;
+  lng: number | null;
 }
 
 export interface IExtendedRequest extends Request {

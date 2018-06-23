@@ -1,0 +1,15 @@
+type UploadDeskPicResponse {
+  ok: Boolean!
+  error: String
+  deskPic: DeskPic
+}
+
+type Mutation {
+  UploadDeskPic(
+    drinkName: String!
+    photoUrl: String!
+    locationName: String!
+    locationLat: Float
+    locationLng: Float
+  ): UploadDeskPicResponse!
+}

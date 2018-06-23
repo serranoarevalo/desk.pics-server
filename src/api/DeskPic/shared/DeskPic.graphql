@@ -1,6 +1,6 @@
 type Coords {
-  lat: Float!
-  lng: Float!
+  lat: Float
+  lng: Float
 }
 
 type DeskPic {

@@ -1,0 +1,9 @@
+type FilterDeskPicsResponse {
+  ok: Boolean
+  error: String
+  deskPics: [DeskPic]
+}
+
+type Query {
+  FilterDeskPics(drinkName: String!): FilterDeskPicsResponse!
+}

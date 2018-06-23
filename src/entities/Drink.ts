@@ -1,5 +1,6 @@
 import {
   BaseEntity,
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -21,5 +22,10 @@ class Drink extends BaseEntity {
 
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;
+
+  @BeforeInsert()
+  formatName(): void {
+    this.name = this.name.toLowerCase();
+  }
 }
 export default Drink;

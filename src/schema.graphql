@@ -1,7 +1,62 @@
+type FilterDeskPicsResponse {
+  ok: Boolean
+  error: String
+  deskPics: [DeskPic]
+}
+
+type Query {
+  FilterDeskPics(drinkName: String!): FilterDeskPicsResponse!
+  GetDeskPic(deskPicId: Int!): GetDeskPicResponse!
+  GetDeskPics(page: Int!): GetDeskPicsResponse!
+  GetUser(fbUserId: String!): GetUserResponse!
+}
+
+type GetDeskPicResponse {
+  ok: Boolean!
+  error: String
+  deskPic: DeskPic
+}
+
+type GetDeskPicsResponse {
+  ok: Boolean!
+  error: String
+  deskPics: [DeskPic]
+}
+
+type Coords {
+  lat: Float
+  lng: Float
+}
+
 type DeskPic {
   id: Int!
   userId: Int!
   user: User!
+  drinkId: Int!
+  drink: Drink!
+  photoUrl: String!
+  locationCoords: Coords
+  locationName: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type UploadDeskPicResponse {
+  ok: Boolean!
+  error: String
+  deskPic: DeskPic
+}
+
+type Mutation {
+  UploadDeskPic(drinkName: String!, photoUrl: String!, locationName: String!, locationLat: Float, locationLng: Float): UploadDeskPicResponse!
+  ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!
+  EditUser(bio: String, location: String): EditUserResponse!
+}
+
+type Drink {
+  id: Int!
+  deskPics: [DeskPic]
+  name: String!
   createdAt: String!
   updatedAt: String!
 }
@@ -11,11 +66,6 @@ type ConnectUserResponse {
   error: String
   user: User
   token: String
-}
-
-type Mutation {
-  ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!
-  EditUser(bio: String, location: String): EditUserResponse!
 }
 
 type EditUserResponse {
@@ -30,11 +80,8 @@ type GetUserResponse {
   user: User
 }
 
-type Query {
-  GetUser(fbUserId: String!): GetUserResponse!
-}
-
 type User {
+  id: Int!
   email: String
   firstName: String!
   lastName: String!

@@ -1,21 +1,50 @@
-export const typeDefs = ["type DeskPic {\n  id: Int!\n  userId: Int!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype ConnectUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n  token: String\n}\n\ntype Mutation {\n  ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!\n  EditUser(bio: String, location: String): EditUserResponse!\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype GetUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  GetUser(fbUserId: String!): GetUserResponse!\n}\n\ntype User {\n  email: String\n  firstName: String!\n  lastName: String!\n  bio: String\n  location: String\n  profilePhoto: String!\n  fullName: String!\n  fbUserId: String!\n  deskPics: [DeskPic]\n  createdAt: String!\n  updatedAt: String!\n}\n"];
+export const typeDefs = ["type FilterDeskPicsResponse {\n  ok: Boolean\n  error: String\n  deskPics: [DeskPic]\n}\n\ntype Query {\n  FilterDeskPics(drinkName: String!): FilterDeskPicsResponse!\n  GetDeskPic(deskPicId: Int!): GetDeskPicResponse!\n  GetDeskPics(page: Int!): GetDeskPicsResponse!\n  GetUser(fbUserId: String!): GetUserResponse!\n}\n\ntype GetDeskPicResponse {\n  ok: Boolean!\n  error: String\n  deskPic: DeskPic\n}\n\ntype GetDeskPicsResponse {\n  ok: Boolean!\n  error: String\n  deskPics: [DeskPic]\n}\n\ntype Coords {\n  lat: Float\n  lng: Float\n}\n\ntype DeskPic {\n  id: Int!\n  userId: Int!\n  user: User!\n  drinkId: Int!\n  drink: Drink!\n  photoUrl: String!\n  locationCoords: Coords\n  locationName: String\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype UploadDeskPicResponse {\n  ok: Boolean!\n  error: String\n  deskPic: DeskPic\n}\n\ntype Mutation {\n  UploadDeskPic(drinkName: String!, photoUrl: String!, locationName: String!, locationLat: Float, locationLng: Float): UploadDeskPicResponse!\n  ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!\n  EditUser(bio: String, location: String): EditUserResponse!\n}\n\ntype Drink {\n  id: Int!\n  deskPics: [DeskPic]\n  name: String!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype ConnectUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n  token: String\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype GetUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype User {\n  id: Int!\n  email: String\n  firstName: String!\n  lastName: String!\n  bio: String\n  location: String\n  profilePhoto: String!\n  fullName: String!\n  fbUserId: String!\n  deskPics: [DeskPic]\n  createdAt: String!\n  updatedAt: String!\n}\n"];
 /* tslint:disable */
 
 export interface Query {
+  FilterDeskPics: FilterDeskPicsResponse;
+  GetDeskPic: GetDeskPicResponse;
+  GetDeskPics: GetDeskPicsResponse;
   GetUser: GetUserResponse;
+}
+
+export interface FilterDeskPicsQueryArgs {
+  drinkName: string;
+}
+
+export interface GetDeskPicQueryArgs {
+  deskPicId: number;
+}
+
+export interface GetDeskPicsQueryArgs {
+  page: number;
 }
 
 export interface GetUserQueryArgs {
   fbUserId: string;
 }
 
-export interface GetUserResponse {
-  ok: boolean;
+export interface FilterDeskPicsResponse {
+  ok: boolean | null;
   error: string | null;
-  user: User | null;
+  deskPics: Array<DeskPic> | null;
+}
+
+export interface DeskPic {
+  id: number;
+  userId: number;
+  user: User;
+  drinkId: number;
+  drink: Drink;
+  photoUrl: string;
+  locationCoords: Coords | null;
+  locationName: string | null;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface User {
+  id: number;
   email: string | null;
   firstName: string;
   lastName: string;
@@ -29,17 +58,49 @@ export interface User {
   updatedAt: string;
 }
 
-export interface DeskPic {
+export interface Drink {
   id: number;
-  userId: number;
-  user: User;
+  deskPics: Array<DeskPic> | null;
+  name: string;
   createdAt: string;
   updatedAt: string;
 }
 
+export interface Coords {
+  lat: number | null;
+  lng: number | null;
+}
+
+export interface GetDeskPicResponse {
+  ok: boolean;
+  error: string | null;
+  deskPic: DeskPic | null;
+}
+
+export interface GetDeskPicsResponse {
+  ok: boolean;
+  error: string | null;
+  deskPics: Array<DeskPic> | null;
+}
+
+export interface GetUserResponse {
+  ok: boolean;
+  error: string | null;
+  user: User | null;
+}
+
 export interface Mutation {
+  UploadDeskPic: UploadDeskPicResponse;
   ConnectUser: ConnectUserResponse;
   EditUser: EditUserResponse;
+}
+
+export interface UploadDeskPicMutationArgs {
+  drinkName: string;
+  photoUrl: string;
+  locationName: string;
+  locationLat: number | null;
+  locationLng: number | null;
 }
 
 export interface ConnectUserMutationArgs {
@@ -52,6 +113,12 @@ export interface ConnectUserMutationArgs {
 export interface EditUserMutationArgs {
   bio: string | null;
   location: string | null;
+}
+
+export interface UploadDeskPicResponse {
+  ok: boolean;
+  error: string | null;
+  deskPic: DeskPic | null;
 }
 
 export interface ConnectUserResponse {

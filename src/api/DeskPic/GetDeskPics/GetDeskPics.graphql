@@ -1,0 +1,9 @@
+type GetDeskPicsResponse {
+  ok: Boolean!
+  error: String
+  deskPics: [DeskPic]
+}
+
+type Query {
+  GetDeskPics(page: Int!): GetDeskPicsResponse!
+}
