@@ -1,7 +1,17 @@
+type Coords {
+  lat: Float!
+  lng: Float!
+}
+
 type DeskPic {
   id: Int!
   userId: Int!
   user: User!
+  drinkId: Int!
+  drink: Drink!
+  photoUrl: String!
+  locationCoords: Coords
+  locationName: String
   createdAt: String!
   updatedAt: String!
 }

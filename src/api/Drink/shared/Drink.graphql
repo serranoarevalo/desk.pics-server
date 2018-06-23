@@ -1,0 +1,7 @@
+type Drink {
+  id: Int!
+  deskPics: [DeskPic]
+  name: String!
+  createdAt: String!
+  updatedAt: String!
+}

@@ -30,8 +30,8 @@ class DeskPic extends BaseEntity {
   @Column({ type: "text" })
   photoUrl: string;
 
-  @Column({ type: "json" })
-  locationLat: ICoords;
+  @Column({ type: "json", nullable: true })
+  locationCoords: ICoords;
 
   @Column({ type: "text" })
   locationName: string;
