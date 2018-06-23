@@ -1,3 +1,4 @@
+import Drink from "../../../entities/Drink";
 import {
   FilterDeskPicsQueryArgs,
   FilterDeskPicsResponse
@@ -10,7 +11,34 @@ const resolvers: Resolvers = {
       _,
       args: FilterDeskPicsQueryArgs
     ): Promise<FilterDeskPicsResponse> => {
-      return;
+      const { drinkName } = args;
+      try {
+        const drink = await Drink.findOne(
+          {
+            name: drinkName.toLowerCase()
+          },
+          { relations: ["deskPics"] }
+        );
+        if (drink) {
+          return {
+            ok: true,
+            error: null,
+            deskPics: drink.deskPics
+          };
+        } else {
+          return {
+            ok: false,
+            error: "Can't find any image with that drink",
+            deskPics: null
+          };
+        }
+      } catch (error) {
+        return {
+          ok: false,
+          error: error.message,
+          deskPics: null
+        };
+      }
     }
   }
 };
