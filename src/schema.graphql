@@ -14,8 +14,8 @@ type ConnectUserResponse {
 }
 
 type Mutation {
-  ConnectUser(email: String, firstName: String, lastName: String, fbUserId: String!): ConnectUserResponse!
-  EditUser(bio: String!, location: String!): EditUserResponse!
+  ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!
+  EditUser(bio: String, location: String): EditUserResponse!
 }
 
 type EditUserResponse {
@@ -35,11 +35,11 @@ type Query {
 }
 
 type User {
-  email: String!
+  email: String
   firstName: String!
   lastName: String!
-  bio: String!
-  location: String!
+  bio: String
+  location: String
   profilePhoto: String!
   fullName: String!
   fbUserId: String!

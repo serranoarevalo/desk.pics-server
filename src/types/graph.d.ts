@@ -1,4 +1,4 @@
-export const typeDefs = ["type DeskPic {\n  id: Int!\n  userId: Int!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype ConnectUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n  token: String\n}\n\ntype Mutation {\n  ConnectUser(email: String, firstName: String, lastName: String, fbUserId: String!): ConnectUserResponse!\n  EditUser(bio: String!, location: String!): EditUserResponse!\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype GetUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  GetUser: GetUserResponse!\n}\n\ntype User {\n  email: String!\n  firstName: String!\n  lastName: String!\n  bio: String!\n  location: String!\n  profilePhoto: String!\n  fullName: String!\n  fbUserId: String!\n  deskPics: [DeskPic]\n  createdAt: String!\n  updatedAt: String!\n}\n"];
+export const typeDefs = ["type DeskPic {\n  id: Int!\n  userId: Int!\n  user: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype ConnectUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n  token: String\n}\n\ntype Mutation {\n  ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!\n  EditUser(bio: String, location: String): EditUserResponse!\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype GetUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  GetUser: GetUserResponse!\n}\n\ntype User {\n  email: String\n  firstName: String!\n  lastName: String!\n  bio: String\n  location: String\n  profilePhoto: String!\n  fullName: String!\n  fbUserId: String!\n  deskPics: [DeskPic]\n  createdAt: String!\n  updatedAt: String!\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -12,11 +12,11 @@ export interface GetUserResponse {
 }
 
 export interface User {
-  email: string;
+  email: string | null;
   firstName: string;
   lastName: string;
-  bio: string;
-  location: string;
+  bio: string | null;
+  location: string | null;
   profilePhoto: string;
   fullName: string;
   fbUserId: string;
@@ -40,14 +40,14 @@ export interface Mutation {
 
 export interface ConnectUserMutationArgs {
   email: string | null;
-  firstName: string | null;
-  lastName: string | null;
+  firstName: string;
+  lastName: string;
   fbUserId: string;
 }
 
 export interface EditUserMutationArgs {
-  bio: string;
-  location: string;
+  bio: string | null;
+  location: string | null;
 }
 
 export interface ConnectUserResponse {

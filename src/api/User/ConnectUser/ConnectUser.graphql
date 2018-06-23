@@ -8,8 +8,8 @@ type ConnectUserResponse {
 type Mutation {
   ConnectUser(
     email: String
-    firstName: String
-    lastName: String
+    firstName: String!
+    lastName: String!
     fbUserId: String!
   ): ConnectUserResponse!
 }

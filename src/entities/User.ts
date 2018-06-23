@@ -14,9 +14,9 @@ import DeskPic from "./DeskPic";
 class User extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
-  @Column({ type: "text", unique: true })
+  @Column({ type: "text", nullable: true })
   @IsEmail()
-  email: string;
+  email: string | null;
 
   @Column({ type: "text" })
   firstName: string;
@@ -24,11 +24,11 @@ class User extends BaseEntity {
   @Column({ type: "text" })
   lastName: string;
 
-  @Column({ type: "text" })
-  bio: string;
+  @Column({ type: "text", nullable: true })
+  bio: string | null;
 
-  @Column({ type: "text" })
-  location: string;
+  @Column({ type: "text", nullable: true })
+  location: string | null;
 
   @Column({ type: "text" })
   profilePhoto: string;
