@@ -1,18 +1,17 @@
 import User from "../../../entities/User";
-import { ConnectUserResponse } from "../../../types/graph";
+import {
+  ConnectUserMutationArgs,
+  ConnectUserResponse
+} from "../../../types/graph";
 import { Resolvers } from "../../../types/types";
 import { createJWT } from "../../../utils/jwt";
 
-interface IArgs {
-  email: string;
-  firstName: string;
-  lastName: string;
-  fbUserId: string;
-}
-
 const resolvers: Resolvers = {
   Mutation: {
-    ConnectUser: async (_, args: IArgs): Promise<ConnectUserResponse> => {
+    ConnectUser: async (
+      _,
+      args: ConnectUserMutationArgs
+    ): Promise<ConnectUserResponse> => {
       const { fbUserId } = args;
       const existingUser = await User.findOne({ fbUserId });
       if (existingUser) {
@@ -37,7 +36,7 @@ const resolvers: Resolvers = {
         } catch (error) {
           return {
             ok: false,
-            error,
+            error: error.message,
             user: null,
             token: null
           };

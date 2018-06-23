@@ -5,5 +5,5 @@ type EditUserResponse {
 }
 
 type Mutation {
-  EditUser(bio: String, location: String): EditUserResponse!
+  EditUser(bio: String!, location: String!): EditUserResponse!
 }

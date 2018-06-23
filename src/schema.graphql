@@ -1,0 +1,49 @@
+type DeskPic {
+  id: Int!
+  userId: Int!
+  user: User!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type ConnectUserResponse {
+  ok: Boolean!
+  error: String
+  user: User
+  token: String
+}
+
+type Mutation {
+  ConnectUser(email: String, firstName: String, lastName: String, fbUserId: String!): ConnectUserResponse!
+  EditUser(bio: String!, location: String!): EditUserResponse!
+}
+
+type EditUserResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type GetUserResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type Query {
+  GetUser: GetUserResponse!
+}
+
+type User {
+  email: String!
+  firstName: String!
+  lastName: String!
+  bio: String!
+  location: String!
+  profilePhoto: String!
+  fullName: String!
+  fbUserId: String!
+  deskPics: [DeskPic]
+  createdAt: String!
+  updatedAt: String!
+}
