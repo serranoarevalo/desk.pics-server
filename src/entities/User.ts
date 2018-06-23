@@ -30,6 +30,9 @@ class User extends BaseEntity {
   @Column({ type: "text" })
   location: string;
 
+  @Column({ type: "text" })
+  profilePhoto: string;
+
   @OneToMany(type => DeskPic, deskPic => deskPic.user)
   deskPics: DeskPic[];
 

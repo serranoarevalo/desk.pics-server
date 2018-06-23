@@ -2,6 +2,10 @@ type User {
   email: String!
   firstName: String!
   lastName: String!
+  bio: String!
+  location: String!
+  profilePhoto: String!
+  fullName: String!
   deskPics: [DeskPic]
   createdAt: String!
   updatedAt: String!

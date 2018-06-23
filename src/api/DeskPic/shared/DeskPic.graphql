@@ -1,4 +1,4 @@
-type Pic {
+type DeskPic {
   id: Int!
   userId: Int!
   user: User!

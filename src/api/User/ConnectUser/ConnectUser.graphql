@@ -1,0 +1,15 @@
+type CreateUserResponse {
+  ok: Boolean!
+  error: String
+  user: User
+  token: String
+}
+
+type Mutation {
+  ConnectUser(
+    email: String
+    firstName: String
+    lastName: String
+    fbUserId: String!
+  ): CreateUserResponse!
+}
