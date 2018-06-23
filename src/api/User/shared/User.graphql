@@ -6,6 +6,7 @@ type User {
   location: String!
   profilePhoto: String!
   fullName: String!
+  fbUserId: String!
   deskPics: [DeskPic]
   createdAt: String!
   updatedAt: String!

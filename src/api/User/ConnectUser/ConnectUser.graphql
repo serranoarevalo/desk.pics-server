@@ -1,4 +1,4 @@
-type CreateUserResponse {
+type ConnectUserResponse {
   ok: Boolean!
   error: String
   user: User
@@ -11,5 +11,5 @@ type Mutation {
     firstName: String
     lastName: String
     fbUserId: String!
-  ): CreateUserResponse!
+  ): ConnectUserResponse!
 }

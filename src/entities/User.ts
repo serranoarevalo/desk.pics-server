@@ -33,6 +33,9 @@ class User extends BaseEntity {
   @Column({ type: "text" })
   profilePhoto: string;
 
+  @Column({ type: "text" })
+  fbUserId: string;
+
   @OneToMany(type => DeskPic, deskPic => deskPic.user)
   deskPics: DeskPic[];
 
