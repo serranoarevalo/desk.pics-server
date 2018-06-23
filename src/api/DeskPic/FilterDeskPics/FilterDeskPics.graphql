@@ -5,5 +5,5 @@ type FilterDeskPicsResponse {
 }
 
 type Query {
-  FilterDeskPics(drinkName: String!): FilterDeskPicsResponse!
+  FilterDeskPics(drinkName: String!, page: Int!): FilterDeskPicsResponse!
 }

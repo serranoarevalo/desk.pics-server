@@ -1,4 +1,5 @@
-import Drink from "../../../entities/Drink";
+import { Like } from "typeorm";
+import DeskPic from "../../../entities/DeskPic";
 import {
   FilterDeskPicsQueryArgs,
   FilterDeskPicsResponse
@@ -11,27 +12,29 @@ const resolvers: Resolvers = {
       _,
       args: FilterDeskPicsQueryArgs
     ): Promise<FilterDeskPicsResponse> => {
-      const { drinkName } = args;
+      const { drinkName, page } = args;
       try {
-        const drink = await Drink.findOne(
-          {
-            name: drinkName.toLowerCase()
+        const deskPics = await DeskPic.find({
+          take: 20,
+          skip: 10 * page,
+          join: {
+            alias: "pic",
+            leftJoinAndSelect: {
+              drink: "pic.drink"
+            }
           },
-          { relations: ["deskPics"] }
-        );
-        if (drink) {
-          return {
-            ok: true,
-            error: null,
-            deskPics: drink.deskPics
-          };
-        } else {
-          return {
-            ok: false,
-            error: "Can't find any image with that drink",
-            deskPics: null
-          };
-        }
+          where: {
+            drink: {
+              name: Like(drinkName)
+            }
+          }
+        });
+        console.log(deskPics);
+        return {
+          ok: true,
+          error: null,
+          deskPics
+        };
       } catch (error) {
         return {
           ok: false,

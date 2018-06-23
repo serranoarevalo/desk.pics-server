@@ -5,7 +5,7 @@ type FilterDeskPicsResponse {
 }
 
 type Query {
-  FilterDeskPics(drinkName: String!): FilterDeskPicsResponse!
+  FilterDeskPics(drinkName: String!, page: Int!): FilterDeskPicsResponse!
   GetDeskPic(deskPicId: Int!): GetDeskPicResponse!
   GetDeskPics(page: Int!): GetDeskPicsResponse!
   GetUser(fbUserId: String!): GetUserResponse!
