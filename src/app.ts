@@ -9,7 +9,14 @@ import { decodeJWT } from "./utils/jwt";
 class App {
   public app: GraphQLServer;
   constructor() {
-    this.app = new GraphQLServer({ schema });
+    this.app = new GraphQLServer({
+      schema,
+      context: req => {
+        return {
+          req: req.request
+        };
+      }
+    });
     this.middlewares();
   }
   private middlewares = (): void => {

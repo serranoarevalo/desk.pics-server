@@ -5,5 +5,5 @@ type GetUserResponse {
 }
 
 type Query {
-  GetUser: GetUserResponse!
+  GetUser(fbUserId: String!): GetUserResponse!
 }
