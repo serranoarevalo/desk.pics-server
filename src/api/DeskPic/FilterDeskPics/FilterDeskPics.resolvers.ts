@@ -1,4 +1,4 @@
-import { Like } from "typeorm";
+import { getConnection } from "typeorm";
 import DeskPic from "../../../entities/DeskPic";
 import {
   FilterDeskPicsQueryArgs,
@@ -12,24 +12,24 @@ const resolvers: Resolvers = {
       _,
       args: FilterDeskPicsQueryArgs
     ): Promise<FilterDeskPicsResponse> => {
-      const { drinkName, page } = args;
+      const { page, drinkName } = args;
       try {
-        const deskPics = await DeskPic.find({
-          take: 20,
-          skip: 10 * page,
-          join: {
-            alias: "pic",
-            leftJoinAndSelect: {
-              drink: "pic.drink"
+        const deskPics = await getConnection()
+          .getRepository(DeskPic)
+          .createQueryBuilder("deskPic")
+          .innerJoinAndSelect("deskPic.user", "user")
+          .innerJoinAndSelect(
+            "deskPic.drink",
+            "drink",
+            "drink.name = :drinkName",
+            {
+              drinkName
             }
-          },
-          where: {
-            drink: {
-              name: Like(drinkName)
-            }
-          }
-        });
-        console.log(deskPics);
+          )
+          .skip(10 * page)
+          .take(50)
+          .getMany();
+
         return {
           ok: true,
           error: null,
