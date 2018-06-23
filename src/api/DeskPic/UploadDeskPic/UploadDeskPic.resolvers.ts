@@ -8,7 +8,7 @@ import { Resolvers } from "../../../types/types";
 import { authMiddleware, makeMiddleware } from "../../../utils/middlewares";
 
 const resolvers: Resolvers = {
-  Query: {
+  Mutation: {
     UploadDeskPic: makeMiddleware(
       authMiddleware,
       async (
