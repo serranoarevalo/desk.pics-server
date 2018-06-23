@@ -2,6 +2,7 @@ type Drink {
   id: Int!
   deskPics: [DeskPic]
   name: String!
+  countDeskPics: Int!
   createdAt: String!
   updatedAt: String!
 }

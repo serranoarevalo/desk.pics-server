@@ -8,6 +8,7 @@ type Query {
   FilterDeskPics(drinkName: String!, page: Int!): FilterDeskPicsResponse!
   GetDeskPic(deskPicId: Int!): GetDeskPicResponse!
   GetDeskPics(page: Int!): GetDeskPicsResponse!
+  GetDrinks: GetDrinksResponse!
   GetUser(fbUserId: String!): GetUserResponse!
 }
 
@@ -53,10 +54,17 @@ type Mutation {
   EditUser(bio: String, location: String): EditUserResponse!
 }
 
+type GetDrinksResponse {
+  ok: Boolean!
+  error: String
+  drinks: [Drink]
+}
+
 type Drink {
   id: Int!
   deskPics: [DeskPic]
   name: String!
+  countDeskPics: Int!
   createdAt: String!
   updatedAt: String!
 }

@@ -27,5 +27,9 @@ class Drink extends BaseEntity {
   formatName(): void {
     this.name = this.name.toLowerCase();
   }
+
+  get countDeskPics(): number {
+    return this.deskPics.length;
+  }
 }
 export default Drink;

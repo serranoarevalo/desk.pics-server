@@ -1,0 +1,9 @@
+type GetDrinksResponse {
+  ok: Boolean!
+  error: String
+  drinks: [Drink]
+}
+
+type Query {
+  GetDrinks: GetDrinksResponse!
+}
