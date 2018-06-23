@@ -7,13 +7,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
+import { ICoords } from "../types/types";
 import Drink from "./Drink";
 import User from "./User";
-
-interface ICoords {
-  lat: number;
-  lng: number;
-}
 
 @Entity()
 class DeskPic extends BaseEntity {
