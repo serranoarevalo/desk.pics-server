@@ -24,6 +24,12 @@ class User extends BaseEntity {
   @Column({ type: "text" })
   lastName: string;
 
+  @Column({ type: "text" })
+  bio: string;
+
+  @Column({ type: "text" })
+  location: string;
+
   @OneToMany(type => DeskPic, deskPic => deskPic.user)
   deskPics: DeskPic[];
 

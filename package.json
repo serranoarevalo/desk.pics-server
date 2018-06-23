@@ -21,12 +21,14 @@
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.3.4",
     "@types/pg": "^7.4.9",
+    "graphql-to-typescript": "^0.1.2",
     "nodemon": "^1.17.5",
     "ts-node": "^6.1.2",
     "tslint-config-prettier": "^1.13.0",
     "typescript": "^2.9.2"
   },
   "scripts": {
-    "dev": "nodemon --exec ts-node src/index.ts -e ts,graphql"
+    "dev": "nodemon --exec ts-node src/index.ts -e ts,graphql",
+    "types": "graphql-to-typescript ./src/api/**/*.graphql ./src/types/graph.d.ts"
   }
 }
