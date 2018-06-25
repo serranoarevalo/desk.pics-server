@@ -16,7 +16,10 @@ const resolvers: Resolvers = {
         const deskPics = await DeskPic.find({
           take: 50,
           skip: 10 * page,
-          relations: ["drink", "user"]
+          relations: ["drink", "user"],
+          order: {
+            id: "DESC"
+          }
         });
         return {
           ok: true,
