@@ -22,7 +22,7 @@ const resolvers: Resolvers = {
         } else {
           return {
             ok: false,
-            error: "Can't find pic",
+            error: "Desk pic not found.",
             deskPic: null
           };
         }

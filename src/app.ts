@@ -34,6 +34,8 @@ class App {
       const user = await decodeJWT(token);
       if (user) {
         req.user = user;
+      } else {
+        req.user = undefined;
       }
     }
     next();
