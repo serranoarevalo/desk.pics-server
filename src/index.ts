@@ -1,6 +1,7 @@
 import { Options } from "graphql-yoga";
-import { createConnection } from "typeorm";
+import { ConnectionOptions, createConnection } from "typeorm";
 import app from "./app";
+import defaultConnectionOptions from "./ormconfig";
 
 const PORT: number | string = process.env.PORT || 4000;
 const GRAPHQL_ENDPOINT: string = "/graphql";
@@ -19,7 +20,21 @@ const appOptions: Options = {
   endpoint: GRAPHQL_ENDPOINT
 };
 
-createConnection().then(() => {
+const connectionOptions: ConnectionOptions = {
+  type: "postgres",
+  host: "localhost",
+  port: 5432,
+  username: "serranoarevalo",
+  password: ""
+};
+
+const combinedOptions = Object.assign(
+  {},
+  connectionOptions,
+  defaultConnectionOptions
+);
+
+createConnection(combinedOptions).then(() => {
   app.start(appOptions, handleListening);
 });
 
