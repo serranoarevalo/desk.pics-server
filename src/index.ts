@@ -37,5 +37,4 @@ const combinedOptions = Object.assign(
 createConnection(combinedOptions).then(() => {
   app.start(appOptions, handleListening);
 });
-
 app.express.on("error", handleAppError);
