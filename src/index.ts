@@ -22,10 +22,10 @@ const appOptions: Options = {
 
 const connectionOptions: ConnectionOptions = {
   type: "postgres",
-  host: "localhost",
+  host: process.env.DB_ENDPOINT || "localhost",
   port: 5432,
-  username: "serranoarevalo",
-  password: ""
+  username: process.env.DB_USERNAME || "serranoarevalo",
+  password: process.env.DB_PASSWORD || ""
 };
 
 const combinedOptions = Object.assign(
