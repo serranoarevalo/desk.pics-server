@@ -11,4 +11,5 @@ type User {
   deskPics: [DeskPic]
   createdAt: String!
   updatedAt: String!
+  isAdmin: Boolean!
 }

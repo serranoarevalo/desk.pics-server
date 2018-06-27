@@ -14,7 +14,7 @@ import DeskPic from "./DeskPic";
 class User extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
-  @Column({ type: "text", nullable: true })
+  @Column({ type: "text", nullable: true, unique: true })
   @IsEmail()
   email: string | null;
 
@@ -38,6 +38,9 @@ class User extends BaseEntity {
 
   @OneToMany(type => DeskPic, deskPic => deskPic.user)
   deskPics: DeskPic[];
+
+  @Column({ type: "boolean", default: false })
+  isAdmin: boolean;
 
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;

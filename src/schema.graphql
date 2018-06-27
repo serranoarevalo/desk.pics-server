@@ -52,6 +52,7 @@ type Mutation {
   UploadDeskPic(drinkName: String!, photoUrl: String!, locationName: String!, locationLat: Float, locationLng: Float): UploadDeskPicResponse!
   ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!
   EditUser(bio: String, location: String): EditUserResponse!
+  MakeAdmin(email: String, masterKey: String): MakeAdminResponse!
 }
 
 type GetDrinksResponse {
@@ -88,6 +89,11 @@ type GetUserResponse {
   user: User
 }
 
+type MakeAdminResponse {
+  ok: Boolean!
+  error: String
+}
+
 type User {
   id: Int!
   email: String
@@ -101,4 +107,5 @@ type User {
   deskPics: [DeskPic]
   createdAt: String!
   updatedAt: String!
+  isAdmin: Boolean!
 }
