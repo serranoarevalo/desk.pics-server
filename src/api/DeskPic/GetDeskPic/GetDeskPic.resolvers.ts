@@ -10,9 +10,12 @@ const resolvers: Resolvers = {
     ): Promise<GetDeskPicResponse> => {
       const { deskPicId } = args;
       try {
-        const deskPic = await DeskPic.findOne(deskPicId, {
-          relations: ["drink", "user"]
-        });
+        const deskPic = await DeskPic.findOne(
+          { id: deskPicId, approved: true },
+          {
+            relations: ["drink", "user"]
+          }
+        );
         if (deskPic) {
           return {
             ok: true,

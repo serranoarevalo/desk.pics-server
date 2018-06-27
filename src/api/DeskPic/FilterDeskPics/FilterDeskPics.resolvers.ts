@@ -26,6 +26,7 @@ const resolvers: Resolvers = {
               drinkName
             }
           )
+          .where("deskPic.approved = true")
           .skip(10 * page)
           .take(50)
           .getMany();

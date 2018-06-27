@@ -19,6 +19,9 @@ const resolvers: Resolvers = {
           relations: ["drink", "user"],
           order: {
             id: "DESC"
+          },
+          where: {
+            approved: true
           }
         });
         return {
