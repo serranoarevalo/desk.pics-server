@@ -13,6 +13,7 @@
     "jsonwebtoken": "^8.3.0",
     "merge-graphql-schemas": "^1.5.1",
     "morgan": "^1.9.0",
+    "node-ifttt-maker": "^1.0.2",
     "npm": "^6.1.0",
     "pg": "^7.4.3",
     "typeorm": "^0.2.7"
