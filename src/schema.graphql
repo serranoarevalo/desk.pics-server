@@ -1,3 +1,16 @@
+type ApproveDeskPicResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  ApproveDeskPic(picId: Int!): ApproveDeskPicResponse!
+  UploadDeskPic(drinkName: String!, photoUrl: String!, locationName: String!, locationLat: Float, locationLng: Float): UploadDeskPicResponse!
+  ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!
+  EditUser(bio: String, location: String): EditUserResponse!
+  MakeAdmin(email: String, masterKey: String): MakeAdminResponse!
+}
+
 type FilterDeskPicsResponse {
   ok: Boolean
   error: String
@@ -38,6 +51,7 @@ type DeskPic {
   photoUrl: String!
   locationCoords: Coords
   locationName: String
+  approved: Boolean!
   createdAt: String!
   updatedAt: String!
 }
@@ -46,13 +60,6 @@ type UploadDeskPicResponse {
   ok: Boolean!
   error: String
   deskPic: DeskPic
-}
-
-type Mutation {
-  UploadDeskPic(drinkName: String!, photoUrl: String!, locationName: String!, locationLat: Float, locationLng: Float): UploadDeskPicResponse!
-  ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!
-  EditUser(bio: String, location: String): EditUserResponse!
-  MakeAdmin(email: String, masterKey: String): MakeAdminResponse!
 }
 
 type GetDrinksResponse {

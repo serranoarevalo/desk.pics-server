@@ -1,4 +1,4 @@
-export const typeDefs = ["type FilterDeskPicsResponse {\n  ok: Boolean\n  error: String\n  deskPics: [DeskPic]\n}\n\ntype Query {\n  FilterDeskPics(drinkName: String!, page: Int!): FilterDeskPicsResponse!\n  GetDeskPic(deskPicId: Int!): GetDeskPicResponse!\n  GetDeskPics(page: Int!): GetDeskPicsResponse!\n  GetDrinks: GetDrinksResponse!\n  GetUser(fbUserId: String!): GetUserResponse!\n}\n\ntype GetDeskPicResponse {\n  ok: Boolean!\n  error: String\n  deskPic: DeskPic\n}\n\ntype GetDeskPicsResponse {\n  ok: Boolean!\n  error: String\n  deskPics: [DeskPic]\n}\n\ntype Coords {\n  lat: Float\n  lng: Float\n}\n\ntype DeskPic {\n  id: Int!\n  userId: Int!\n  user: User!\n  drinkId: Int!\n  drink: Drink!\n  photoUrl: String!\n  locationCoords: Coords\n  locationName: String\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype UploadDeskPicResponse {\n  ok: Boolean!\n  error: String\n  deskPic: DeskPic\n}\n\ntype Mutation {\n  UploadDeskPic(drinkName: String!, photoUrl: String!, locationName: String!, locationLat: Float, locationLng: Float): UploadDeskPicResponse!\n  ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!\n  EditUser(bio: String, location: String): EditUserResponse!\n  MakeAdmin(email: String, masterKey: String): MakeAdminResponse!\n}\n\ntype GetDrinksResponse {\n  ok: Boolean!\n  error: String\n  drinks: [Drink]\n}\n\ntype Drink {\n  id: Int!\n  deskPics: [DeskPic]\n  name: String!\n  countDeskPics: Int!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype ConnectUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n  token: String\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype GetUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype MakeAdminResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String\n  firstName: String!\n  lastName: String!\n  bio: String\n  location: String\n  profilePhoto: String!\n  fullName: String!\n  fbUserId: String!\n  deskPics: [DeskPic]\n  createdAt: String!\n  updatedAt: String!\n  isAdmin: Boolean!\n}\n"];
+export const typeDefs = ["type ApproveDeskPicResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  ApproveDeskPic(picId: Int!): ApproveDeskPicResponse!\n  UploadDeskPic(drinkName: String!, photoUrl: String!, locationName: String!, locationLat: Float, locationLng: Float): UploadDeskPicResponse!\n  ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!\n  EditUser(bio: String, location: String): EditUserResponse!\n  MakeAdmin(email: String, masterKey: String): MakeAdminResponse!\n}\n\ntype FilterDeskPicsResponse {\n  ok: Boolean\n  error: String\n  deskPics: [DeskPic]\n}\n\ntype Query {\n  FilterDeskPics(drinkName: String!, page: Int!): FilterDeskPicsResponse!\n  GetDeskPic(deskPicId: Int!): GetDeskPicResponse!\n  GetDeskPics(page: Int!): GetDeskPicsResponse!\n  GetDrinks: GetDrinksResponse!\n  GetUser(fbUserId: String!): GetUserResponse!\n}\n\ntype GetDeskPicResponse {\n  ok: Boolean!\n  error: String\n  deskPic: DeskPic\n}\n\ntype GetDeskPicsResponse {\n  ok: Boolean!\n  error: String\n  deskPics: [DeskPic]\n}\n\ntype Coords {\n  lat: Float\n  lng: Float\n}\n\ntype DeskPic {\n  id: Int!\n  userId: Int!\n  user: User!\n  drinkId: Int!\n  drink: Drink!\n  photoUrl: String!\n  locationCoords: Coords\n  locationName: String\n  approved: Boolean!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype UploadDeskPicResponse {\n  ok: Boolean!\n  error: String\n  deskPic: DeskPic\n}\n\ntype GetDrinksResponse {\n  ok: Boolean!\n  error: String\n  drinks: [Drink]\n}\n\ntype Drink {\n  id: Int!\n  deskPics: [DeskPic]\n  name: String!\n  countDeskPics: Int!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype ConnectUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n  token: String\n}\n\ntype EditUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype GetUserResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype MakeAdminResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String\n  firstName: String!\n  lastName: String!\n  bio: String\n  location: String\n  profilePhoto: String!\n  fullName: String!\n  fbUserId: String!\n  deskPics: [DeskPic]\n  createdAt: String!\n  updatedAt: String!\n  isAdmin: Boolean!\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -41,6 +41,7 @@ export interface DeskPic {
   photoUrl: string;
   locationCoords: Coords | null;
   locationName: string | null;
+  approved: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -100,10 +101,15 @@ export interface GetUserResponse {
 }
 
 export interface Mutation {
+  ApproveDeskPic: ApproveDeskPicResponse;
   UploadDeskPic: UploadDeskPicResponse;
   ConnectUser: ConnectUserResponse;
   EditUser: EditUserResponse;
   MakeAdmin: MakeAdminResponse;
+}
+
+export interface ApproveDeskPicMutationArgs {
+  picId: number;
 }
 
 export interface UploadDeskPicMutationArgs {
@@ -129,6 +135,11 @@ export interface EditUserMutationArgs {
 export interface MakeAdminMutationArgs {
   email: string | null;
   masterKey: string | null;
+}
+
+export interface ApproveDeskPicResponse {
+  ok: boolean;
+  error: string | null;
 }
 
 export interface UploadDeskPicResponse {

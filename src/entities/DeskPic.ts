@@ -36,6 +36,9 @@ class DeskPic extends BaseEntity {
   @Column({ type: "text" })
   locationName: string;
 
+  @Column({ type: "boolean", default: false })
+  approved: boolean;
+
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;
 }
