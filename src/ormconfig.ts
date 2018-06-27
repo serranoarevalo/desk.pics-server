@@ -2,11 +2,11 @@ const defaultConnectionOptions = {
   database: "deskpics",
   synchronize: true,
   logging: false,
-  entities: ["entities/**/*.*"],
+  entities: ["entities/**.*"],
   migrations: ["migrations/**/*.*"],
   subscribers: ["subscribers/**/*.*"],
   cli: {
-    entitiesDir: "entities",
+    entitiesDir: "/entities",
     migrationsDir: "migrations",
     subscribersDir: "subscribers"
   }
