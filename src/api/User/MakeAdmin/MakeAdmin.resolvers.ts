@@ -1,9 +1,8 @@
 import User from "../../../entities/User";
-import { MASTER_PASSWORD } from "../../../keys";
 import { MakeAdminMutationArgs, MakeAdminResponse } from "../../../types/graph";
 import { Resolvers } from "../../../types/types";
 
-const MASTER_KEY = process.env.MASTER_PASSWORD || MASTER_PASSWORD;
+const MASTER_PASSWORD = process.env.MASTER_PASSWORD || "";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -12,7 +11,7 @@ const resolvers: Resolvers = {
       args: MakeAdminMutationArgs
     ): Promise<MakeAdminResponse> => {
       const { email, masterKey } = args;
-      if (masterKey === MASTER_KEY) {
+      if (masterKey === MASTER_PASSWORD) {
         const user = await User.findOne({ email });
         if (user) {
           user.isAdmin = true;

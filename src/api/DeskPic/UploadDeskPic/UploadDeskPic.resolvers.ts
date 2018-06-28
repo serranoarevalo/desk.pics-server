@@ -1,15 +1,12 @@
 import IFTTTMaker from "node-ifttt-maker";
 import DeskPic from "../../../entities/DeskPic";
 import Drink from "../../../entities/Drink";
-import { MAKER_KEY } from "../../../keys";
 import {
   UploadDeskPicMutationArgs,
   UploadDeskPicResponse
 } from "../../../types/graph";
 import { Resolvers } from "../../../types/types";
 import { authMiddleware, makeMiddleware } from "../../../utils/middlewares";
-
-const ifttt = new IFTTTMaker(process.env.MAKER_KEY || MAKER_KEY);
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -42,6 +39,7 @@ const resolvers: Resolvers = {
               lng: locationLng
             }
           }).save();
+          const ifttt = new IFTTTMaker(process.env.MAKER_KEY || "");
           ifttt.request("new_desk");
           if (deskPic) {
             return {
