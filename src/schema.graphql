@@ -1,28 +1,41 @@
+type AdminGetDeskPicsResponse {
+  ok: Boolean!
+  error: String
+  deskPics: [DeskPic]
+}
+
+type Query {
+  AdminGetDeskPics(approved: Boolean!, masterPassword: String!): AdminGetDeskPicsResponse!
+  FilterDeskPics(drinkName: String!, page: Int!): FilterDeskPicsResponse!
+  GetDeskPic(deskPicId: Int!): GetDeskPicResponse!
+  GetDeskPics(page: Int!): GetDeskPicsResponse!
+  GetDrinks: GetDrinksResponse!
+  GetUser(fbUserId: String!): GetUserResponse!
+}
+
 type ApproveDeskPicResponse {
   ok: Boolean!
   error: String
 }
 
 type Mutation {
-  ApproveDeskPic(picId: Int!): ApproveDeskPicResponse!
+  ApproveDeskPic(picId: Int!, masterPassword: String!): ApproveDeskPicResponse!
+  DeleteDeskPic(picId: Int!, masterPassword: String!): DeleteDeskPicResponse!
   UploadDeskPic(drinkName: String!, photoUrl: String!, locationName: String!, locationLat: Float, locationLng: Float): UploadDeskPicResponse!
   ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!
   EditUser(bio: String, location: String): EditUserResponse!
   MakeAdmin(email: String, masterKey: String): MakeAdminResponse!
 }
 
+type DeleteDeskPicResponse {
+  ok: Boolean!
+  error: String
+}
+
 type FilterDeskPicsResponse {
   ok: Boolean
   error: String
   deskPics: [DeskPic]
-}
-
-type Query {
-  FilterDeskPics(drinkName: String!, page: Int!): FilterDeskPicsResponse!
-  GetDeskPic(deskPicId: Int!): GetDeskPicResponse!
-  GetDeskPics(page: Int!): GetDeskPicsResponse!
-  GetDrinks: GetDrinksResponse!
-  GetUser(fbUserId: String!): GetUserResponse!
 }
 
 type GetDeskPicResponse {

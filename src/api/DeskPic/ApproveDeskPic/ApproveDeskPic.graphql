@@ -4,5 +4,5 @@ type ApproveDeskPicResponse {
 }
 
 type Mutation {
-  ApproveDeskPic(picId: Int!): ApproveDeskPicResponse!
+  ApproveDeskPic(picId: Int!, masterPassword: String!): ApproveDeskPicResponse!
 }

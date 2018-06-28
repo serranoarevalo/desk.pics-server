@@ -1,45 +1,47 @@
 import DeskPic from "../../../entities/DeskPic";
 import {
-  ApproveDeskPicMutationArgs,
-  ApproveDeskPicResponse
+  AdminGetDeskPicsQueryArgs,
+  AdminGetDeskPicsResponse
 } from "../../../types/graph";
 import { Resolvers } from "../../../types/types";
 
 const MASTER_PASSWORD = process.env.MASTER_PASSWORD || "";
 
 const resolvers: Resolvers = {
-  Mutation: {
-    ApproveDeskPic: async (
+  Query: {
+    AdminGetDeskPics: async (
       _,
-      args: ApproveDeskPicMutationArgs
-    ): Promise<ApproveDeskPicResponse> => {
-      const { picId, masterPassword } = args;
+      args: AdminGetDeskPicsQueryArgs
+    ): Promise<AdminGetDeskPicsResponse> => {
+      const { approved, masterPassword } = args;
       try {
-        const deskPic = await DeskPic.findOne(picId);
-        if (deskPic) {
+        const deskPics = await DeskPic.find({ approved });
+        if (deskPics) {
           if (masterPassword === MASTER_PASSWORD) {
-            deskPic.approved = true;
-            deskPic.save();
             return {
               ok: true,
-              error: null
+              error: null,
+              deskPics
             };
           } else {
             return {
               ok: false,
-              error: "Not admin"
+              error: "Not admin",
+              deskPics: null
             };
           }
         } else {
           return {
             ok: false,
-            error: "Can't find photo"
+            error: "Can't find photos",
+            deskPics: null
           };
         }
       } catch (error) {
         return {
           ok: false,
-          error: error.message
+          error: error.message,
+          deskPics: null
         };
       }
     }

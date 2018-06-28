@@ -1,0 +1,12 @@
+type AdminGetDeskPicsResponse {
+  ok: Boolean!
+  error: String
+  deskPics: [DeskPic]
+}
+
+type Query {
+  AdminGetDeskPics(
+    approved: Boolean!
+    masterPassword: String!
+  ): AdminGetDeskPicsResponse!
+}
