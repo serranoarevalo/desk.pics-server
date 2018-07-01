@@ -37,7 +37,8 @@ const resolvers: Resolvers = {
             locationCoords: {
               lat: locationLat,
               lng: locationLng
-            }
+            },
+            approved: true
           }).save();
           const ifttt = new IFTTTMaker(process.env.MAKER_KEY || "");
           ifttt.request("new_desk");
