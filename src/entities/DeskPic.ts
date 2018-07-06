@@ -39,7 +39,16 @@ class DeskPic extends BaseEntity {
   @Column({ type: "boolean", default: false })
   approved: boolean;
 
-  get officialUrl(): string {
+  get bigUrl(): string {
+    const url = this.photoUrl;
+    const transformedUrl = url.replace(
+      "upload/",
+      "upload/a_ignore,c_scale,q_auto:eco,w_500/"
+    );
+    return transformedUrl;
+  }
+
+  get thumbnailUrl(): string {
     const url = this.photoUrl;
     const transformedUrl = url.replace(
       "upload/",
