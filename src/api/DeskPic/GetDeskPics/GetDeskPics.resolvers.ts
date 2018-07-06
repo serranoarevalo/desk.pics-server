@@ -14,8 +14,8 @@ const resolvers: Resolvers = {
       const { page } = args;
       try {
         const deskPics = await DeskPic.find({
-          take: 50,
-          skip: 10 * page,
+          take: 20,
+          skip: 20 * page,
           relations: ["drink", "user"],
           order: {
             id: "DESC"
@@ -24,16 +24,21 @@ const resolvers: Resolvers = {
             approved: true
           }
         });
+        const totalDeskPics = await DeskPic.count({ approved: true });
         return {
           ok: true,
           error: null,
-          deskPics
+          deskPics,
+          currentPage: page,
+          pages: totalDeskPics / 20
         };
       } catch (error) {
         return {
           error: error.message,
           ok: false,
-          deskPics: null
+          deskPics: null,
+          currentPage: 0,
+          pages: 0
         };
       }
     }

@@ -2,6 +2,8 @@ type GetDeskPicsResponse {
   ok: Boolean!
   error: String
   deskPics: [DeskPic]
+  pages: Int!
+  currentPage: Int!
 }
 
 type Query {
