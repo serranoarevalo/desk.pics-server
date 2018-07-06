@@ -39,7 +39,7 @@ class DeskPic extends BaseEntity {
   @Column({ type: "boolean", default: false })
   approved: boolean;
 
-  get bigUrl(): string {
+  get thumbnailUrl(): string {
     const url = this.photoUrl;
     const transformedUrl = url.replace(
       "upload/",
@@ -48,7 +48,7 @@ class DeskPic extends BaseEntity {
     return transformedUrl;
   }
 
-  get thumbnailUrl(): string {
+  get bigUrl(): string {
     const url = this.photoUrl;
     const transformedUrl = url.replace(
       "upload/",
