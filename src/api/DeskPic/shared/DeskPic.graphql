@@ -12,6 +12,7 @@ type DeskPic {
   photoUrl: String!
   locationCoords: Coords
   locationName: String
+  officialUrl: String!
   approved: Boolean!
   createdAt: String!
   updatedAt: String!

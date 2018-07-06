@@ -43,7 +43,7 @@
     "pretsc:build": "rm -rf build",
     "tsc:build": "tsc && cd src && copy ./api/**/*.graphql ../build/dist/api",
     "start": "cd build/dist && node .",
-    "deploy": "now --public",
+    "deploy": "now",
     "predeploy": "yarn run tsc:build"
   }
 }
