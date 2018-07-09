@@ -9,7 +9,5 @@ type Mutation {
     drinkName: String!
     photoUrl: String!
     locationName: String!
-    locationLat: Float
-    locationLng: Float
   ): UploadDeskPicResponse!
 }

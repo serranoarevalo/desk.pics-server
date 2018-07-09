@@ -1,5 +1,8 @@
 import axios from "axios";
 import { NextFunction, Request, Response, Router } from "express";
+import DeskPic from "./entities/DeskPic";
+import Drink from "./entities/Drink";
+import User from "./entities/User";
 
 class SlackRouter {
   router: Router;
@@ -34,21 +37,43 @@ class SlackRouter {
           } = data;
           const cleanedText = parsedText.substring(1, parsedText.length - 1);
           const splittedTex = cleanedText.split("|");
-          const drink = splittedTex[0];
+          const drinkName = splittedTex[0];
           const location = splittedTex[1];
-          console.log(
-            first_name,
-            last_name,
-            email,
-            image_original,
-            drink,
-            location
-          );
-          res.send(200);
+          try {
+            let dbUser = await User.findOne({ email });
+            if (!dbUser) {
+              dbUser = await User.create({
+                email,
+                firstName: first_name,
+                lastName: last_name,
+                profilePhoto: image_original,
+                fbUserId: "SLACK666"
+              }).save();
+            }
+            let drink = await Drink.findOne({
+              name: drinkName.toLowerCase()
+            });
+            if (!drink) {
+              drink = await Drink.create({
+                name: drinkName.toLowerCase()
+              }).save();
+            }
+            await DeskPic.create({
+              user: dbUser,
+              photoUrl: url_private,
+              locationName: location,
+              approved: true,
+              drink
+            }).save();
+          } catch (error) {
+            console.log(error);
+          }
+          res.sendStatus(200);
         }
       }
+    } else {
+      res.sendStatus(401);
     }
-    res.sendStatus(401);
   };
 
   private init() {

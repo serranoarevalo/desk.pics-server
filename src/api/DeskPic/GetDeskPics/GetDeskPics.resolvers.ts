@@ -30,7 +30,7 @@ const resolvers: Resolvers = {
           error: null,
           deskPics,
           currentPage: page,
-          pages: totalDeskPics / 20
+          pages: Math.floor(totalDeskPics / 20)
         };
       } catch (error) {
         return {

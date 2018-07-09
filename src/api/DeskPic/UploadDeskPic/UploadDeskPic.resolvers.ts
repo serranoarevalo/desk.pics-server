@@ -17,16 +17,10 @@ const resolvers: Resolvers = {
         args: UploadDeskPicMutationArgs,
         { req }
       ): Promise<UploadDeskPicResponse> => {
-        const {
-          drinkName,
-          photoUrl,
-          locationName,
-          locationLat,
-          locationLng
-        } = args;
+        const { drinkName, photoUrl, locationName } = args;
         let drink = await Drink.findOne({ name: drinkName.toLowerCase() });
         if (!drink) {
-          drink = await Drink.create({ name: drinkName }).save();
+          drink = await Drink.create({ name: drinkName.toLowerCase() }).save();
         }
         try {
           const deskPic = await DeskPic.create({
@@ -34,10 +28,6 @@ const resolvers: Resolvers = {
             drink,
             photoUrl,
             locationName,
-            locationCoords: {
-              lat: locationLat,
-              lng: locationLng
-            },
             approved: true
           }).save();
           const ifttt = new IFTTTMaker(process.env.MAKER_KEY || "");
