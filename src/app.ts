@@ -22,11 +22,12 @@ class App {
     this.middlewares();
   }
   private middlewares = (): void => {
-    this.app.express.use(bodyParser.json());
-    this.app.express.use(cors());
     this.app.express.use(logger("dev"));
-    this.app.express.use(this.jwtMiddleware);
+    this.app.express.use(bodyParser.urlencoded({ extended: true }));
+    this.app.express.use(bodyParser.json());
     this.app.express.use("/slack", slackRouter);
+    this.app.express.use(cors());
+    this.app.express.use(this.jwtMiddleware);
   };
   private jwtMiddleware = async (
     req: IExtendedRequest,
