@@ -19,7 +19,7 @@ class SlackRouter {
     if (text && url_private && user) {
       const regex = /\[.*?\|.\D+\]/;
       if (regex.test(text)) {
-        const parsedText = text.match(regex)[0];
+        const parsedText: string = text.match(regex)[0];
         const {
           data,
           data: { ok }
@@ -32,7 +32,19 @@ class SlackRouter {
           const {
             profile: { first_name, last_name, email, image_original }
           } = data;
-          console.log(first_name, last_name, email, image_original, parsedText);
+          const cleanedText = parsedText.substring(1, parsedText.length - 1);
+          const splittedTex = cleanedText.split("|");
+          const drink = splittedTex[0];
+          const location = splittedTex[1];
+          console.log(
+            first_name,
+            last_name,
+            email,
+            image_original,
+            drink,
+            location
+          );
+          res.send(200);
         }
       }
     }
