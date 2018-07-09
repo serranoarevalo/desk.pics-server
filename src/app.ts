@@ -1,7 +1,9 @@
+import bodyParser from "body-parser";
 import cors from "cors";
 import { NextFunction, Response } from "express";
 import { GraphQLServer } from "graphql-yoga";
 import logger from "morgan";
+import slackRouter from "./router";
 import schema from "./schema";
 import { IExtendedRequest } from "./types/types";
 import { decodeJWT } from "./utils/jwt";
@@ -20,9 +22,11 @@ class App {
     this.middlewares();
   }
   private middlewares = (): void => {
+    this.app.express.use(bodyParser.json());
     this.app.express.use(cors());
     this.app.express.use(logger("dev"));
     this.app.express.use(this.jwtMiddleware);
+    this.app.express.use("/slack", slackRouter);
   };
   private jwtMiddleware = async (
     req: IExtendedRequest,
