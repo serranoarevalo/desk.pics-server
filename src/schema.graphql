@@ -21,7 +21,7 @@ type ApproveDeskPicResponse {
 type Mutation {
   ApproveDeskPic(picId: Int!, masterPassword: String!): ApproveDeskPicResponse!
   DeleteDeskPic(picId: Int!, masterPassword: String!): DeleteDeskPicResponse!
-  UploadDeskPic(drinkName: String!, photoUrl: String!, locationName: String!, locationLat: Float, locationLng: Float): UploadDeskPicResponse!
+  UploadDeskPic(drinkName: String!, photoUrl: String!, locationName: String!): UploadDeskPicResponse!
   ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!
   EditUser(bio: String, location: String): EditUserResponse!
   MakeAdmin(email: String, masterKey: String): MakeAdminResponse!
