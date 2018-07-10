@@ -1,13 +1,13 @@
 import Axios from "axios";
 import cloudinary from "cloudinary";
 import Fs from "fs";
-import MzFs from "mz/fs";
+
 import Path from "path";
 
-const downloadImage = async photoUrl => {
+const downloadImage = async (photoUrl: string, name: string) => {
   const url = photoUrl;
 
-  const path = Path.resolve(__dirname, "images", "slackUpload.jpg");
+  const path = Path.resolve(__dirname, `${name}.jpg`);
 
   const response = await Axios({
     method: "GET",
@@ -31,16 +31,23 @@ const downloadImage = async photoUrl => {
   });
 };
 
-const cloudinaryUpload = async (slackUrl: string) => {
-  downloadImage(slackUrl);
-  try {
-    const file = await MzFs.readFile(
-      Path.join(__dirname, "images/slackUpload.jpg")
-    );
-    const result = await cloudinary.uploader.upload(file);
-    console.log(result);
-  } catch (error) {
-    console.log(error);
+const cloudinaryUpload = async (slackUrl: string): Promise<string | null> => {
+  const name = Math.random()
+    .toString(36)
+    .substr(2);
+
+  await downloadImage(slackUrl, name);
+
+  const result = await cloudinary.uploader.upload(
+    Path.join(__dirname, `${name}.jpg`)
+  );
+
+  Fs.unlink(Path.join(__dirname, `${name}.jpg`), error => console.log(error));
+
+  if (result.secure_url) {
+    return result.secure_url;
+  } else {
+    return null;
   }
 };
 

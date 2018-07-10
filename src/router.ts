@@ -17,7 +17,6 @@ class SlackRouter {
     res: Response,
     next: NextFunction
   ) => {
-    console.log(req.body);
     if (req.body.challenge) {
       res.send({
         challenge: req.body.challenge
@@ -65,14 +64,17 @@ class SlackRouter {
                   name: drinkName.toLowerCase()
                 }).save();
               }
-              cloudinaryUpload(url_private);
-              await DeskPic.create({
-                user: dbUser,
-                photoUrl: url_private,
-                locationName: location,
-                approved: true,
-                drink
-              }).save();
+              const photoUrl = await cloudinaryUpload(url_private);
+              if (photoUrl) {
+                await DeskPic.create({
+                  user: dbUser,
+                  photoUrl,
+                  locationName: location,
+                  approved: true,
+                  drink
+                }).save();
+              }
+              res.sendStatus(200);
             } catch (error) {
               console.log(error);
             }
