@@ -24,6 +24,9 @@ class DeskPic extends BaseEntity {
   @Column({ nullable: true })
   drinkId: number;
 
+  @Column({ type: "boolean", default: false })
+  isFeatured: boolean;
+
   @ManyToOne(type => Drink, drink => drink.deskPics)
   drink: Drink;
 
