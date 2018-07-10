@@ -34,7 +34,9 @@ const downloadImage = async photoUrl => {
 const cloudinaryUpload = async (slackUrl: string) => {
   downloadImage(slackUrl);
   try {
-    const file = await MzFs.readFile("./images/slackUpload.jpg");
+    const file = await MzFs.readFile(
+      Path.join(__dirname, "images/slackUpload.jpg")
+    );
     const result = await cloudinary.uploader.upload(file);
     console.log(result);
   } catch (error) {
