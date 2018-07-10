@@ -74,16 +74,13 @@ class SlackRouter {
                   drink
                 }).save();
               }
-              res.sendStatus(200);
             } catch (error) {
               console.log(error);
             }
-            res.sendStatus(200);
           }
         }
-      } else {
-        res.sendStatus(401);
       }
+      res.sendStatus(200);
     }
   };
 
