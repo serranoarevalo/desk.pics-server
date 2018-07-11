@@ -1,7 +1,5 @@
 import DeskPic from "../../../entities/DeskPic";
 import {
-  DeleteDeskPicMutationArgs,
-  DeleteDeskPicResponse,
   EditDeskPicMutationArgs,
   EditDeskPicResponse
 } from "../../../types/graph";

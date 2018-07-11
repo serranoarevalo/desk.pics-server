@@ -26,6 +26,7 @@ class SlackRouter {
         event: { text = null, file: { url_private = null } = {}, user }
       } = req.body;
       if (text && url_private && user) {
+        res.sendStatus(200);
         const regex = /\[.*?\|.\D+\]/;
         if (regex.test(text)) {
           const parsedText: string = text.match(regex)[0];
@@ -45,6 +46,7 @@ class SlackRouter {
             const splittedTex = cleanedText.split("|");
             const drinkName = splittedTex[0];
             const location = splittedTex[1];
+
             try {
               let dbUser = await User.findOne({ email });
               if (!dbUser) {
@@ -80,7 +82,6 @@ class SlackRouter {
           }
         }
       }
-      res.sendStatus(200);
     }
   };
 
