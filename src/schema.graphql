@@ -21,6 +21,7 @@ type ApproveDeskPicResponse {
 type Mutation {
   ApproveDeskPic(picId: Int!, masterPassword: String!): ApproveDeskPicResponse!
   DeleteDeskPic(picId: Int!, masterPassword: String!): DeleteDeskPicResponse!
+  EditDeskPic(picId: Int!, masterPassword: String!, action: EditDeskPicAction!): EditDeskPicResponse!
   UploadDeskPic(drinkName: String!, photoUrl: String!, locationName: String!): UploadDeskPicResponse!
   ConnectUser(email: String, firstName: String!, lastName: String!, fbUserId: String!): ConnectUserResponse!
   EditUser(bio: String, location: String): EditUserResponse!
@@ -30,6 +31,18 @@ type Mutation {
 type DeleteDeskPicResponse {
   ok: Boolean!
   error: String
+}
+
+type EditDeskPicResponse {
+  ok: Boolean!
+  error: String
+}
+
+enum EditDeskPicAction {
+  DELETE
+  FEATURE
+  APPROVE
+  DISAPPROVE
 }
 
 type FilterDeskPicsResponse {

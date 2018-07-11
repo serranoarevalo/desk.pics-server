@@ -52,7 +52,7 @@ class SlackRouter {
                   email,
                   firstName: real_name_normalized || "Nomad",
                   lastName: real_name_normalized || "Coder",
-                  profilePhoto: image_original,
+                  profilePhoto: image_original || "null",
                   fbUserId: "SLACK666"
                 }).save();
               }

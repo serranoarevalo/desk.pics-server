@@ -1,0 +1,19 @@
+type EditDeskPicResponse {
+  ok: Boolean!
+  error: String
+}
+
+enum EditDeskPicAction {
+  DELETE
+  FEATURE
+  APPROVE
+  DISAPPROVE
+}
+
+type Mutation {
+  EditDeskPic(
+    picId: Int!
+    masterPassword: String!
+    action: EditDeskPicAction!
+  ): EditDeskPicResponse!
+}
