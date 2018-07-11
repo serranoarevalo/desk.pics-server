@@ -1,8 +1,0 @@
-type ApproveDeskPicResponse {
-  ok: Boolean!
-  error: String
-}
-
-type Mutation {
-  ApproveDeskPic(picId: Int!, masterPassword: String!): ApproveDeskPicResponse!
-}

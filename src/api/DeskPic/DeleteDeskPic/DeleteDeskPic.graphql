@@ -1,8 +1,0 @@
-type DeleteDeskPicResponse {
-  ok: Boolean!
-  error: String
-}
-
-type Mutation {
-  DeleteDeskPic(picId: Int!, masterPassword: String!): DeleteDeskPicResponse!
-}
