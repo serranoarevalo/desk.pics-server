@@ -17,6 +17,8 @@ const resolvers: Resolvers = {
           }
         );
         if (deskPic) {
+          deskPic.views = deskPic.views + 1;
+          deskPic.save();
           return {
             ok: true,
             error: null,

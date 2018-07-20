@@ -42,6 +42,9 @@ class DeskPic extends BaseEntity {
   @Column({ type: "boolean", default: false })
   approved: boolean;
 
+  @Column({ type: "int", default: 0 })
+  views: number;
+
   get thumbnailUrl(): string {
     const url = this.photoUrl;
     const transformedUrl = url.replace(
