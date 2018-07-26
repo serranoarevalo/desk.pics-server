@@ -23,9 +23,9 @@ class SlackRouter {
       });
     } else {
       const {
-        event: { text = null, file: { url_private = null } = {}, user }
+        event: { text = null, files, user }
       } = req.body;
-      if (text && url_private && user) {
+      if (text && files && user) {
         res.sendStatus(200);
         const regex = /\[.*?\|.\D+\]/;
         if (regex.test(text)) {
@@ -66,7 +66,7 @@ class SlackRouter {
                   name: drinkName.toLowerCase()
                 }).save();
               }
-              const photoUrl = await cloudinaryUpload(url_private);
+              const photoUrl = await cloudinaryUpload(files[0].url_private);
               if (photoUrl) {
                 await DeskPic.create({
                   user: dbUser,
